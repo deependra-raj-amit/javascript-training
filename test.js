@@ -316,43 +316,100 @@
 
 //Map Example: Transforms each element and returns a new array.
 
-const balances = [5000, 10000, 15000];
-const withInterest = balances.map(b => b + b * 0.5);
-const total = balances.reduce((acc, val) => acc + val, 0);   //reduce() -> Reduces the array to a single value.
-const totalWithInterest = withInterest.reduce((acc, val) => acc + val, 0);
-console.log(withInterest);
-console.log("Total amount without interest = " + total);
-console.log("Total amount interest = " + totalWithInterest);
+// const balances = [5000, 10000, 15000];
+// const withInterest = balances.map(b => b + b * 0.5);
+// const total = balances.reduce((acc, val) => acc + val, 0);   //reduce() -> Reduces the array to a single value.
+// const totalWithInterest = withInterest.reduce((acc, val) => acc + val, 0);
+// console.log(withInterest);
+// console.log("Total amount without interest = " + total);
+// console.log("Total amount interest = " + totalWithInterest);
 
 
 // filter()
 // Returns a new array of elements that pass the condition.
 
-const customers = [
-    { name: "Aakash", balance: 500000 },
-    { name: "Kumar", balance: 80000 },
-    { name: "Mishra", balance: 96000 },
-    { name: "Sam", balance: 80000 },
-    { name: "Abhishek", balance: 7800000 },
-    { name: "Pandey", balance: 750000 },
-  ];
+// const customers = [
+//     { name: "Aakash", balance: 500000 },
+//     { name: "Kumar", balance: 80000 },
+//     { name: "Mishra", balance: 96000 },
+//     { name: "Sam", balance: 80000 },
+//     { name: "Abhishek", balance: 7800000 },
+//     { name: "Pandey", balance: 750000 },
+//   ];
   
-  const premiumCustomers = customers.filter(c => c.balance >= 100000);
-  console.log(premiumCustomers);
+//   const premiumCustomers = customers.filter(c => c.balance >= 100000);
+//   console.log(premiumCustomers);
   
 
-//Object Destructuring:
-const transactions = [
-    { id: "T001", amount: 2500, type: "Transfer" },
-    { id: "T002", amount: 1500, type: "Deposit" },
-    { id: "T003", amount: 3000, type: "Withdrawal" },
+// //Object Destructuring:
+// const transactions = [
+//     { id: "T001", amount: 2500, type: "Transfer" },
+//     { id: "T002", amount: 1500, type: "Deposit" },
+//     { id: "T003", amount: 3000, type: "Withdrawal" },
   
-  ];
-  //const { amount, type } = transaction;
-  transactions.forEach((transaction) => {
-    console.log(`The amount of ${transaction.amount} rupees is transferred by the method of ${transaction.type} referring to the transaction Id : ${transaction.id}`);
-  })
+//   ];
+//   //const { amount, type } = transaction;
+//   transactions.forEach((transaction) => {
+//     console.log(`The amount of ${transaction.amount} rupees is transferred by the method of ${transaction.type} referring to the transaction Id : ${transaction.id}`);
+//   })
+ 
+
+//Hoisting
+//console.log(x); 
+//console.log(y);
+//console.log(z);
+// var x = 5;
+// let y = 10;
+// const z = 15;
+// console.log(x);
+// console.log(y);
+// console.log(z);
   
-  
-  
-  
+
+//Promises Example:
+
+function processLoan(amount) {
+  return new Promise((resolve, reject) => {
+    if (amount < 100000) {
+      resolve("Loan approved");
+    } else {
+      reject("Loan denied: exceeds limit");
+    }
+  });
+}
+
+processLoan(80000)
+  .then(msg => console.log(msg))
+  .catch(err => console.log(err));
+
+//Async/Await
+
+function getTransactions() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(["TXN1", "TXN2"]), 3000);
+  });
+}
+
+async function showAccountSummary() {
+  const txns = await getTransactions();
+  console.log("Recent Transactions:", txns);
+}
+
+showAccountSummary();
+
+
+
+//Error handling in Async
+
+async function checkLoanStatus() {
+  try {
+    const result = await processLoan(1100);
+    setTimeout(() => {
+      console.log(result);
+    }, 4000);
+   
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
+checkLoanStatus();
